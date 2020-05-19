@@ -2,19 +2,6 @@ const User = require("../models/User");
 const Schedule = require("../models/Schedule");
 
 module.exports = {
-  async index(req, res) {
-    try {
-      const schedule = await Schedule.findAll({
-        include: [{ association: "user", attributes: ["name"] }],
-        attributes: ["cutype", "cutvalue", "date", "hour"],
-      });
-
-      return res.json(schedule);
-    } catch (error) {
-      return res.status(400).json({ error });
-    }
-  },
-
   async store(req, res) {
     try {
       const { cutype, cutvalue, date, hour } = req.body;
